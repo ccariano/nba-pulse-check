@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "python3 -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    "start": "./scripts/start_server.sh"
   }
 }
