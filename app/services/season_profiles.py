@@ -5,12 +5,15 @@ import datetime as dt
 import json
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, TYPE_CHECKING
 
 try:  # Optional dependency in tests
     import pandas as pd  # type: ignore
 except Exception:  # pragma: no cover - optional dependency
     pd = None  # type: ignore
+
+if TYPE_CHECKING:  # pragma: no cover - typing only
+    from pandas import DataFrame
 
 try:  # Optional dependency in tests
     from nba_api.stats.endpoints import LeagueDashTeamStats
@@ -21,6 +24,40 @@ from app.config import SETTINGS, ensure_data_dir, load_json, save_json
 from app.utils.logger import get_logger
 
 LOGGER = get_logger(__name__)
+
+
+def _prepare_four_factors_frame(frame: "DataFrame") -> "DataFrame":
+    """Normalize NBA API four-factors response for downstream merges."""
+
+    # Work on a copy so callers retain their original frame if needed.
+    prepared = frame.copy()
+
+    alias_map = {
+        "DRB_PCT": ["DREB_PCT", "DEF_REB_PCT"],
+        "OPP_FT_RATE": ["OPP_FTA_RATE", "OPP_FT_RATE_ALLOWED"],
+    }
+
+    for target, aliases in alias_map.items():
+        if target in prepared.columns:
+            continue
+        replacement = next((alias for alias in aliases if alias in prepared.columns), None)
+        if replacement:
+            prepared.rename(columns={replacement: target}, inplace=True)
+
+    defaults = {
+        "DRB_PCT": 0.0,
+        "OPP_FT_RATE": 0.0,
+    }
+
+    missing = [column for column in defaults if column not in prepared.columns]
+    if missing:
+        LOGGER.warning(
+            "Four factors data missing columns %s; defaulting to safe values.", missing
+        )
+        for column in missing:
+            prepared[column] = defaults[column]
+
+    return prepared
 
 
 @dataclass
@@ -203,6 +240,8 @@ class SeasonProfileService:
             per_mode_detailed="PerGame",
             season_type_all_star=season_type,
         ).get_data_frames()[0]
+
+        four_factors = _prepare_four_factors_frame(four_factors)
 
         merged = base.merge(
             advanced[["TEAM_ID", "PACE", "PACE_RANK", "DEF_RATING"]],
