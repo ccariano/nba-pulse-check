@@ -1,11 +1,14 @@
 """FastAPI application entry point."""
 from __future__ import annotations
 
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 
-from app.config import SETTINGS, ensure_data_dir
+from app.config import ensure_data_dir
 from app.routers import games, season_profiles
 
 app = FastAPI(title="NBA Pace Pulse", version="0.1.0")
@@ -26,8 +29,6 @@ app.mount("/frontend", StaticFiles(directory="frontend", html=True), name="front
 
 
 @app.get("/")
-def index() -> dict:
-    return {
-        "message": "NBA Pace Pulse API",
-        "feature_betting_insight": SETTINGS.feature_betting_insight,
-    }
+def index() -> FileResponse:
+    frontend_dir = Path(__file__).resolve().parents[1] / "frontend"
+    return FileResponse(frontend_dir / "index.html")
