@@ -1,0 +1,206 @@
+:root {
+  color-scheme: light;
+  --bg: #f8f8f8;
+  --panel: #ffffff;
+  --border: #111214;
+  --accent: #ff9f1c;
+  --accent-soft: rgba(255, 159, 28, 0.12);
+  --text: #1f1f21;
+  --muted: #6b6b6f;
+  --micro: #00a8e8;
+  --font: "IBM Plex Mono", "Roboto Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 12px;
+}
+
+.brand {
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.env-flag {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 24px;
+}
+
+.section-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 12px 0;
+}
+
+.game-list {
+  border: 2px solid var(--border);
+  padding: 16px;
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.game-items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.game-item {
+  padding: 12px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+  transition: background 0.2s ease;
+}
+
+.game-item:hover,
+.game-item.active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.game-item .label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.game-item .meta {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.insight-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  border: 2px solid var(--border);
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+}
+
+.card-header {
+  padding: 16px;
+  border-bottom: 2px solid var(--border);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.card-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.summary {
+  font-size: 1rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.subtext {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+.micro-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.micro-badge {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 8px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.micro-badge.clamp {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.micro-badge.fast {
+  border-color: var(--micro);
+  color: var(--micro);
+}
+
+.micro-badge.market-high {
+  border-color: var(--border);
+  color: var(--border);
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 24px;
+  margin: 0;
+}
+
+.metrics dt {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.metrics dd {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
