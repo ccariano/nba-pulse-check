@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NBA Pace Pulse</title>
+    <link rel="stylesheet" href="/frontend/css/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="masthead">
+        <h1 class="brand">NBA Pace Pulse</h1>
+        <span class="env-flag" id="env-flag">Betting Insight Active</span>
+      </header>
+      <main class="layout">
+        <aside class="game-list" id="game-list">
+          <h2 class="section-label">Live Games</h2>
+          <div class="game-items" id="game-items"></div>
+        </aside>
+        <section class="insight-panel">
+          <div class="card" id="insight-card">
+            <div class="card-header">Betting Insight</div>
+            <div class="card-body">
+              <p class="summary" id="insight-summary">Loading insight...</p>
+              <p class="subtext" id="insight-subtext"></p>
+              <div class="micro-badges" id="micro-badges"></div>
+              <dl class="metrics" id="insight-metrics"></dl>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="/frontend/js/app.js" type="module"></script>
+  </body>
+</html>
