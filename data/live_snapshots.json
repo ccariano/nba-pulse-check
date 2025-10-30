@@ -1,0 +1,43 @@
+{
+  "games": [
+    {
+      "gameId": "0022500001",
+      "homeTeam": {
+        "teamId": "1610612747",
+        "name": "Los Angeles Lakers"
+      },
+      "awayTeam": {
+        "teamId": "1610612737",
+        "name": "Atlanta Hawks"
+      },
+      "liveTotal": 224.5,
+      "rateOfChange": "MOD",
+      "updated": "2025-01-15T04:30:00",
+      "lineHistory": [
+        {"time": "00:00", "quarter": 1, "total": 221.5},
+        {"time": "08:00", "quarter": 1, "total": 223.0},
+        {"time": "02:30", "quarter": 2, "total": 225.0}
+      ],
+      "liveBox": {
+        "quarter": 2,
+        "clock": "05:32",
+        "home": {
+          "teamId": "1610612747",
+          "pts": 58,
+          "fga": 45,
+          "oreb": 6,
+          "tov": 7,
+          "fta": 16
+        },
+        "away": {
+          "teamId": "1610612737",
+          "pts": 52,
+          "fga": 44,
+          "oreb": 5,
+          "tov": 9,
+          "fta": 12
+        }
+      }
+    }
+  ]
+}

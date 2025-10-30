@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: nba-pace-pulse
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: SEASON
+        value: 2025-26
+      - key: SEASON_TYPE
+        value: Regular Season
+      - key: PAID_API_ENABLED
+        value: "true"
+      - key: LIVE_LINE_SOURCE
+        value: cache
+      - key: FEATURE_BETTING_INSIGHT
+        value: "true"
