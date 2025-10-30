@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "prestart": "./scripts/bootstrap_venv.sh",
-    "start": ".venv/bin/python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+    "prestart": "python3 -m pip install --no-cache-dir -r requirements.txt",
+    "start": "python3 -m uvicorn app.main:app --host 0.0.0.0 --port $PORT"
   }
 }
