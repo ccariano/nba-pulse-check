@@ -85,20 +85,6 @@ every render with cache age, alignment, and summary length.
 
 ### Deployment Notes
 
-The repository ships with a [`render.yaml`](./render.yaml) that provisions a
-Python web service on Render. It installs requirements with `pip` and starts the
-API using:
-
-```bash
-uvicorn app.main:app --host 0.0.0.0 --port $PORT
-```
-
-If you configure the service manually, be sure to select the Python runtime and
-set the same start command so Render does not attempt to execute a Node entry
-point (e.g., `yarn start`). For legacy services that are already pinned to a
-Node start command, the repository now includes a fallback `package.json` and
-[`render-build.sh`](./render-build.sh) so `yarn start` will still launch
-Uvicorn after installing the Python dependencies. Provide the environment
-variables above and enable `FEATURE_BETTING_INSIGHT` for the canary rollout.
-The `/frontend` mount is handled automatically by FastAPI's static file
-configuration.
+The app is designed for Render deployment. Provide the environment variables
+above and mount the `frontend` directory as static assets. Use the
+`FEATURE_BETTING_INSIGHT` flag to gate rollout during the canary period.
