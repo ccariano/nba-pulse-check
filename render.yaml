@@ -3,7 +3,7 @@ services:
     name: nba-pace-pulse
     env: python
     buildCommand: ./render-build.sh
-    startCommand: .venv/bin/python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    startCommand: ./scripts/start_server.sh
     envVars:
       - key: SEASON
         value: 2025-26
